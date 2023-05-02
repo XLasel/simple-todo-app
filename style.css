@@ -122,9 +122,9 @@ body {
 /* Стили для списка задач */
 .todo-app__list {
     position: relative;
-    /* z-index: 2; */
 	border-top: 1px solid #e6e6e6;
 }
+
 
 .todo-app__toggle-all {
     width: 1px;
@@ -161,6 +161,14 @@ body {
 .todo-app__items {
     list-style: none;
     padding: 0;
+}
+
+.todo-app__items.todo-app__items_completed .todo-app__task:not(.completed) {
+    display: none;
+}
+
+.todo-app__items.todo-app__items_active .todo-app__task.completed {
+    display: none;
 }
 
 .todo-app__task {

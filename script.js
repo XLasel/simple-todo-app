@@ -197,6 +197,7 @@ function clearCompleted(event) {
 
 function showByFilter(event) {
 	if (event.target.classList.contains('selected')) return;
+
 	filterLinks.forEach((item) => {
 		if (item === event.target) {
 			item.classList.add('selected');
@@ -204,31 +205,24 @@ function showByFilter(event) {
 			item.classList.remove('selected');
 		}
 	});
+
 	if (event.target.id === "filter-all") {
-		let allTasks = document.querySelectorAll('.todo-app__task');
-		for (let i = 0; i < allTasks.length; i++) {
-			allTasks[i].classList.remove('hidden');
-		}
+		tasksList.className = 'todo-app__items';
 	}
+
 	if (event.target.id === "filter-active") {
-		let completedTasks = document.querySelectorAll('.todo-app__task.completed');
-		for (let i = 0; i < completedTasks.length; i++) {
-			completedTasks[i].classList.add('hidden');
+		if (tasksList.classList.contains("todo-app__items_completed")) {
+			tasksList.classList.remove('todo-app__items_completed')
 		}
-		let activeTasks = document.querySelectorAll('.todo-app__task:not(.completed)');
-		for (let i = 0; i < activeTasks.length; i++) {
-			activeTasks[i].classList.remove('hidden');
-		}
+		tasksList.classList.add('todo-app__items_active')
 	}
+
+
 	if (event.target.id === "filter-completed") {
-		let activeTasks = document.querySelectorAll('.todo-app__task:not(.completed)');
-		for (let i = 0; i < activeTasks.length; i++) {
-			activeTasks[i].classList.add('hidden');
+		if (tasksList.classList.contains("todo-app__items_active")) {
+			tasksList.classList.remove('todo-app__items_active')
 		}
-		let completedTasks = document.querySelectorAll('.todo-app__task.completed');
-		for (let i = 0; i < completedTasks.length; i++) {
-			completedTasks[i].classList.remove('hidden');
-		}
+		tasksList.classList.add('todo-app__items_completed')
 	}
 }
 
