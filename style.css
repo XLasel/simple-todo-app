@@ -47,7 +47,7 @@ body {
 
 .container {
     margin: 0 auto;
-    min-width: 370px;
+    min-width: 250px;
     max-width: 580px;
     padding: 0 15px;
 }
@@ -259,16 +259,8 @@ body {
     transition: color 0.2s ease-out;
 }
 
-.todo-app__task-delete:hover {
-    color: #af5b5e;
-}
-
 .todo-app__task-delete:after {
     content: '×';
-}
-
-.todo-app__task:hover .todo-app__task-delete {
-    display: block;
 }
 
 /* Стили для подвала */
@@ -299,6 +291,8 @@ body {
 
 .todo-app__count {
     cursor: default;
+    width: 80px;
+    text-align: center;
 }
 
 .todo-app__filters {
@@ -316,10 +310,6 @@ body {
     text-decoration: none;
 }
 
-.todo-app__filter-link:hover {
-    border-color: rgba(175, 47, 47, 0.1);
-}
-
 .todo-app__filter-link.selected {
     border-color: rgba(175, 47, 47, 0.2);
 }
@@ -329,10 +319,15 @@ body {
     cursor: pointer;
 } 
 
-.todo-app__clear:hover {
-    text-decoration: underline;
+.info {
+	margin: 0 auto;
+    /* padding-top: 65px; */
+	color: #bfbfbf;
+	font-size: 10px;
+    line-height: 1;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	text-align: center;
 }
-
 
 /* font-family: 'Overpass', sans-serif;
 font-family: 'Rubik', sans-serif;

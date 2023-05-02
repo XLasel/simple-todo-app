@@ -1,12 +1,13 @@
 'use strict';
-const taskInput = document.querySelector('.todo-app__new-task')
+const body = document.body;
+const taskInput = document.querySelector('.todo-app__new-task');
 const sectionList = document.querySelector('.todo-app__list');
 const tasksList = document.querySelector('.todo-app__items');
 const footer = document.querySelector('.todo-app__footer');
 const counter = document.getElementById('counter');
 const toggleAll = document.getElementById('toggle-all');
-const btnClear = document.querySelector(".todo-app__clear");
-const filterLinks = document.querySelectorAll(".todo-app__filter-link")
+const btnClear = document.querySelector('.todo-app__clear');
+const filterLinks = document.querySelectorAll('.todo-app__filter-link')
 
 let tasks = [];
 
@@ -18,6 +19,20 @@ if (localStorage.getItem('tasks')) {
 checkEmptyList();
 checkStatusTasks();
 activeCount();
+
+if (window.matchMedia('(pointer: coarse)').matches) {
+	const hintForMobile = `
+	<div class="info">
+		<p>Double tab for editing the task</p>
+	</div>`
+	body.insertAdjacentHTML('beforeend', hintForMobile);
+} else {
+	const hintHTML = `
+	<div class="info">
+		<p>Double click to edit a task</p>
+	</div>`
+	body.insertAdjacentHTML('beforeend', hintHTML);
+}
 
 taskInput.addEventListener('keydown', (event) => {
 	if (event.keyCode === 13) {
@@ -44,24 +59,22 @@ toggleAll.addEventListener('change', () => {
 	});
 	activeCount();
 });
-footer.addEventListener('click', clearCompleted);
-filterLinks.forEach(link => link.addEventListener("click", showByFilter));
-applyFilterFromUrl();
-if (window.matchMedia("(pointer: coarse)").matches) {
-	tasksList.addEventListener('touchstart', (event) => {
-		const touchStartTime = new Date().getTime();
-		setTimeout(() => {
-			const touchEndTime = new Date().getTime();
-			const touchDuration = touchEndTime - touchStartTime;
-
-			if (touchDuration >= 1000) {
-				editTask(event);
-			}
-		}, 1000);
+if (window.matchMedia('(pointer: coarse)').matches) {
+	let lastTouchEnd = 0;
+	tasksList.addEventListener('touchend', function (event) {
+		const now = new Date().getTime();
+		if (now - lastTouchEnd <= 300) {
+			// жест двойного тапа
+			editTask(event);
+		}
+		lastTouchEnd = now;
 	});
 } else {
 	tasksList.addEventListener('dblclick', editTask);
 }
+footer.addEventListener('click', clearCompleted);
+filterLinks.forEach(link => link.addEventListener('click', showByFilter));
+applyFilterFromUrl();
 window.addEventListener('beforeunload', saveToLocalStorage);
 
 
@@ -178,7 +191,9 @@ function checkStatusTasks() {
 }
 
 function activeCount() {
-	return counter.textContent = tasks.reduce((total, task) => (task.done === true) ? total : total + 1, 0);
+	const count = tasks.reduce((total, task) => (task.done === true) ? total : total + 1, 0);
+	const textCase = (count === 0 || count === 1) ? 'item' : 'items';
+	counter.textContent = `${count} ${textCase} left`;
 }
 
 function clearCompleted(event) {
@@ -206,23 +221,19 @@ function showByFilter(event) {
 		}
 	});
 
-	if (event.target.id === "filter-all") {
+	if (event.target.id === 'filter-all') {
 		tasksList.className = 'todo-app__items';
 	}
 
-	if (event.target.id === "filter-active") {
-		if (tasksList.classList.contains("todo-app__items_completed")) {
-			tasksList.classList.remove('todo-app__items_completed')
-		}
-		tasksList.classList.add('todo-app__items_active')
+	if (event.target.id === 'filter-active') {
+		tasksList.classList.remove('todo-app__items_completed');
+		tasksList.classList.add('todo-app__items_active');
 	}
 
 
-	if (event.target.id === "filter-completed") {
-		if (tasksList.classList.contains("todo-app__items_active")) {
-			tasksList.classList.remove('todo-app__items_active')
-		}
-		tasksList.classList.add('todo-app__items_completed')
+	if (event.target.id === 'filter-completed') {
+		tasksList.classList.remove('todo-app__items_active');
+		tasksList.classList.add('todo-app__items_completed');
 	}
 }
 
