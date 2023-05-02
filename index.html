@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The list of tasks of your efficiency">
+    <title>Todo App</title>
+    <meta name="keywords" content="to-do list, task, task list">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Overpass&family=Rubik&family=Ruda:wght@900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media.css">
+</head>
+
+<body>
+    <div class="container">
+        <article class="todo-app">
+            <header class="todo-app__header">
+                <h1 class="todo-app__title">todos</h1>
+                <input type="text" class="todo-app__new-task" placeholder="Add a task..." autofocus>
+            </header>
+            <section class="todo-app__list">
+                <input id="toggle-all" type="checkbox" class="todo-app__toggle-all"></input>
+                <label for="toggle-all"></label>
+                <ul class="todo-app__items">
+                </ul>
+            </section>
+            <footer class="todo-app__footer">
+                <div class="footer-flex">
+                <span class="todo-app__count"><strong id="counter">0</strong> itmes left</span>
+                <ul class="todo-app__filters">
+                    <li class="todo-app__filter-item"><a id="filter-all" href="#/" class="todo-app__filter-link selected">All</a></li>
+                    <li class="todo-app__filter-item"><a id="filter-active" href="#/active" class="todo-app__filter-link">Active</a></li>
+                    <li class="todo-app__filter-item"><a id="filter-completed" href="#/completed" class="todo-app__filter-link">Completed</a></li>
+                </ul>
+                <button class="todo-app__clear">Clear comleted</button>
+            </div>
+            </footer>
+        </article>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
