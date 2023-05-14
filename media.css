@@ -2,61 +2,55 @@
   .todo-app__footer {
     font-size: 12px;
   }
+
   .todo-app__filters {
     gap: 0px;
   }
 }
+
 @media (max-width: 385px) {
   .footer-flex {
     position: relative;
     flex-direction: column;
     row-gap: 20px;
   }
+
   .todo-app__count {
     position: absolute;
     right: 0;
     bottom: -3px;
   }
+
   .todo-app__filters {
     font-size: 14px;
     gap: 15px;
   }
+
   .todo-app__clear {
     align-self: flex-start;
-} 
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
   .todo-app__task-delete:hover {
     color: #af5b5e;
   }
+
   .todo-app__task:hover .todo-app__task-delete {
     display: block;
   }
+  
   .todo-app__filter-link:hover {
     border-color: rgba(175, 47, 47, 0.1);
   }
+
   .todo-app__clear:hover {
     text-decoration: underline;
   }
 }
+
 @media (pointer: coarse) and (hover: none) {
   .todo-app__task-delete {
     display: block;
-    position: absolute;
-    top: 0;
-    right: 10px;
-    bottom: 0;
-    width: 40px;
-    height: 40px;
-    margin: auto 0;
-    font-size: 30px;
-    color: #cc9a9a;
-    margin-bottom: 11px;
-    transition: color 0.2s ease-out;
-  }
-
-  .todo-app__task-delete:hover {
-    color: #af5b5e;
   }
 }

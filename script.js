@@ -2,12 +2,12 @@
 const body = document.body;
 const taskInput = document.querySelector('.todo-app__new-task');
 const sectionList = document.querySelector('.todo-app__list');
+const toggleAll = document.getElementById('toggle-all');
 const tasksList = document.querySelector('.todo-app__items');
 const footer = document.querySelector('.todo-app__footer');
 const counter = document.getElementById('counter');
-const toggleAll = document.getElementById('toggle-all');
-const btnClear = document.querySelector('.todo-app__clear');
 const filterLinks = document.querySelectorAll('.todo-app__filter-link')
+const btnClear = document.querySelector('.todo-app__clear');
 
 let tasks = [];
 
@@ -19,6 +19,7 @@ if (localStorage.getItem('tasks')) {
 checkEmptyList();
 checkStatusTasks();
 activeCount();
+applyFilterFromUrl();
 
 if (window.matchMedia('(pointer: coarse)').matches) {
 	const hintForMobile = `
@@ -35,19 +36,22 @@ if (window.matchMedia('(pointer: coarse)').matches) {
 }
 
 taskInput.addEventListener('keydown', (event) => {
-	if (event.keyCode === 13) {
+	if (event.key === 'Enter') {
 		addTask();
 	}
 });
+
 document.addEventListener('click', (event) => {
 	if (event.target !== taskInput) {
 		addTask();
 	}
 });
+
 tasksList.addEventListener('click', (event) => {
 	deleteTask(event);
 	doneTask(event);
 });
+
 toggleAll.addEventListener('change', () => {
 	const checked = toggleAll.checked;
 	tasks.forEach(function (task) {
@@ -59,6 +63,7 @@ toggleAll.addEventListener('change', () => {
 	});
 	activeCount();
 });
+
 if (window.matchMedia('(pointer: coarse)').matches) {
 	let lastTouchEnd = 0;
 	tasksList.addEventListener('touchend', function (event) {
@@ -72,9 +77,11 @@ if (window.matchMedia('(pointer: coarse)').matches) {
 } else {
 	tasksList.addEventListener('dblclick', editTask);
 }
+
 footer.addEventListener('click', clearCompleted);
+
 filterLinks.forEach(link => link.addEventListener('click', showByFilter));
-applyFilterFromUrl();
+
 window.addEventListener('beforeunload', saveToLocalStorage);
 
 
@@ -147,6 +154,7 @@ function editTask(event) {
 
 	const editTask = parentNode.querySelector('.edit-task');
 	editTask.value = taskItem.textContent;
+	editTask.focus();
 
 	function saveEdit() {
 		const id = Number(parentNode.id);
@@ -159,7 +167,7 @@ function editTask(event) {
 	}
 
 	editTask.addEventListener('keydown', (event) => {
-		if (event.keyCode === 13) {
+		if (event.key === 'Enter') {
 			saveEdit();
 		}
 	});
@@ -167,7 +175,7 @@ function editTask(event) {
 	document.addEventListener('click', function handler(event) {
 		if (event.target === editTask) return;
 		event.stopPropagation();
-		saveEdit(event);
+		saveEdit();
 		document.removeEventListener('click', handler);
 	});
 }
