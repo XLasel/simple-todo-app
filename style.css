@@ -346,6 +346,7 @@ body {
 
 .info {
 	margin: 0 auto;
+    padding-bottom: 15px;
 	text-align: center;
 	
     font-size: 10px;

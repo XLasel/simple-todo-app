@@ -1,5 +1,5 @@
 'use strict';
-const body = document.body;
+const todoApp = document.querySelector('.todo-app')
 const taskInput = document.querySelector('.todo-app__new-task');
 const sectionList = document.querySelector('.todo-app__list');
 const toggleAll = document.getElementById('toggle-all');
@@ -26,13 +26,13 @@ if (window.matchMedia('(pointer: coarse)').matches) {
 	<div class="info">
 		<p>Double tab for editing the task</p>
 	</div>`
-	body.insertAdjacentHTML('beforeend', hintForMobile);
+	todoApp.insertAdjacentHTML('afterend', hintForMobile);
 } else {
 	const hintHTML = `
 	<div class="info">
 		<p>Double click to edit a task</p>
 	</div>`
-	body.insertAdjacentHTML('beforeend', hintHTML);
+	todoApp.insertAdjacentHTML('afterend', hintHTML);
 }
 
 taskInput.addEventListener('keydown', (event) => {
