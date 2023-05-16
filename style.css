@@ -19,10 +19,8 @@ button {
 	vertical-align: baseline;
 	color: inherit;
 
-    /* Убирает стандартный визуальный стиль элемента управления веб-браузера */
 	-webkit-appearance: none;
 	appearance: none;
-    /* Улучшения сглаживания шрифтов в веб-браузерах, работающих на движках WebKit (Safari, Chrome) и Gecko (Firefox) */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -99,7 +97,6 @@ body {
     text-align: center;
     color: rgba(175, 47, 47, 0.15);
 
-    /* Оптимизация отображения текста для веб-браузеров  */
     -webkit-text-rendering: optimizeLegibility;
 	-moz-text-rendering: optimizeLegibility;
 	text-rendering: optimizeLegibility;
@@ -129,7 +126,7 @@ body {
 
 }
 
-/* Стили для списка задач */
+/* Styles for the task list */
 
 .todo-app__list {
     position: relative;
@@ -282,7 +279,7 @@ body {
     content: '×';
 }
 
-/* Стили для подвала */
+/* Styles for footer */
 
 .todo-app__footer {
     position: relative;
